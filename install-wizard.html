@@ -1,0 +1,1257 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Panduan Instalasi — AIBILL RADIUS ISP Billing System</title>
+  <style>
+    :root{--bg:#0a1628;--card:rgba(255,255,255,0.04);--glass:rgba(255,255,255,0.06);--accent:#14b8a6;--accent2:#06b6d4;--muted:#9aa4b2;--success:#22c55e;--warning:#f59e0b;--danger:#ef4444}
+    html,body{height:100%;margin:0;font-family:Inter,"San Francisco",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial;color:#e6eef8;background:linear-gradient(180deg,#071025 0%,#0a1628 60%);-webkit-font-smoothing:antialiased}
+    .wrap{max-width:1100px;margin:30px auto;padding:24px;border-radius:20px;background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.015));box-shadow:0 10px 40px rgba(0,0,0,0.4);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.05)}
+    header{display:flex;align-items:center;gap:18px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,0.06)}
+    .logo{width:68px;height:68px;border-radius:16px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-weight:800;color:white;font-size:16px;box-shadow:0 8px 24px rgba(20,184,166,0.25);letter-spacing:-0.5px}
+    h1{margin:0;font-size:22px;font-weight:700;background:linear-gradient(90deg,#fff,#a5f3fc);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+    p.lead{color:var(--muted);margin:6px 0 0;font-size:14px}
+    .badge{display:inline-block;background:rgba(20,184,166,0.15);color:var(--accent);padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600;margin-left:10px}
+    .wizard{display:grid;grid-template-columns:280px 1fr;gap:20px;margin-top:20px}
+    @media(max-width:800px){.wizard{grid-template-columns:1fr}}
+    nav.steps{background:var(--card);padding:14px;border-radius:14px;height:fit-content}
+    nav.steps button{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:12px 14px;border-radius:10px;border:none;background:transparent;color:#94a3b8;margin-bottom:6px;cursor:pointer;transition:all 0.2s;font-size:13px}
+    nav.steps button:hover{background:rgba(255,255,255,0.03);color:#e2e8f0}
+    nav.steps button.active{background:linear-gradient(90deg,rgba(20,184,166,0.12),rgba(6,182,212,0.08));color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,0.04)}
+    nav.steps button .num{width:24px;height:24px;border-radius:8px;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
+    nav.steps button.active .num{background:var(--accent);color:#0a1628}
+    nav.steps button.done .num{background:var(--success)}
+    section.content{padding:20px;background:linear-gradient(180deg,rgba(255,255,255,0.025),rgba(255,255,255,0.01));border-radius:14px;border:1px solid rgba(255,255,255,0.04)}
+    .controls{display:flex;gap:10px;justify-content:space-between;align-items:center;margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.05)}
+    .btn{padding:10px 18px;border-radius:10px;border:none;cursor:pointer;font-weight:600;font-size:13px;transition:all 0.2s}
+    .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#0a1628}
+    .btn.primary:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(20,184,166,0.3)}
+    .btn.ghost{background:transparent;color:var(--muted);border:1px solid rgba(255,255,255,0.08)}
+    .btn.ghost:hover{background:rgba(255,255,255,0.03)}
+    pre.code{background:rgba(0,0,0,0.4);padding:14px 16px;border-radius:10px;color:#e6eef8;overflow-x:auto;font-family:SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:12.5px;line-height:1.6;border:1px solid rgba(255,255,255,0.04);margin:0}
+    .cmd-row{display:flex;gap:10px;align-items:flex-start;margin:12px 0}
+    .cmd-row pre{flex:1}
+    .copy-btn{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);padding:10px 14px;border-radius:8px;color:var(--muted);cursor:pointer;font-size:12px;transition:all 0.2s;white-space:nowrap}
+    .copy-btn:hover{background:rgba(255,255,255,0.08);color:#fff}
+    .copy-btn.copied{background:rgba(34,197,94,0.15);color:var(--success);border-color:rgba(34,197,94,0.3)}
+    .note{background:rgba(20,184,166,0.08);padding:12px 14px;border-radius:10px;color:#a5f3fc;font-size:13px;margin:14px 0;border-left:3px solid var(--accent)}
+    .note.warning{background:rgba(245,158,11,0.1);color:#fcd34d;border-left-color:var(--warning)}
+    .note.danger{background:rgba(239,68,68,0.1);color:#fca5a5;border-left-color:var(--danger)}
+    .note.success{background:rgba(34,197,94,0.1);color:#86efac;border-left-color:var(--success)}
+    h2{margin:0 0 16px;font-size:18px;font-weight:700;color:#fff}
+    h3{margin:20px 0 10px;font-size:14px;font-weight:600;color:#e2e8f0}
+    code.inline{background:rgba(255,255,255,0.06);padding:3px 8px;border-radius:6px;font-family:monospace;font-size:12px}
+    footer{margin-top:14px;color:var(--muted);font-size:12px;text-align:center}
+    ul{margin:10px 0;padding-left:20px}
+    ul li{margin:6px 0;color:#cbd5e1;font-size:13px}
+    .progress-bar{height:4px;background:rgba(255,255,255,0.06);border-radius:4px;margin-bottom:16px;overflow:hidden}
+    .progress-bar .fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width 0.3s}
+    .step-indicator{color:var(--muted);font-size:12px}
+    .features{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:16px 0}
+    .feature{background:rgba(255,255,255,0.03);padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,0.04)}
+    .feature h4{margin:0 0 6px;font-size:13px;color:#fff}
+    .feature p{margin:0;font-size:12px;color:var(--muted)}
+    table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}
+    table th,table td{padding:10px 12px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.05)}
+    table th{color:var(--muted);font-weight:600;font-size:12px;text-transform:uppercase}
+    table td{color:#e2e8f0}
+    .check{color:var(--success)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="logo">AIB</div>
+      <div>
+        <h1>AIBILL RADIUS <span class="badge">v2.4.3</span></h1>
+        <p class="lead">Panduan Instalasi ISP Billing System — Ubuntu 20.04/22.04 dengan Next.js, MySQL, FreeRADIUS & PM2</p>
+      </div>
+    </header>
+
+    <div class="wizard">
+      <nav class="steps" id="steps">
+        <button class="active" data-step="1"><span class="num">1</span>Persiapan & Requirement</button>
+        <button data-step="2"><span class="num">2</span>Timezone & NTP Sync</button>
+        <button data-step="3"><span class="num">3</span>Install Node.js & Dependencies</button>
+        <button data-step="4"><span class="num">4</span>Setup MySQL Database</button>
+        <button data-step="5"><span class="num">5</span>Upload & Setup Aplikasi</button>
+        <button data-step="6"><span class="num">6</span>Konfigurasi Environment</button>
+        <button data-step="7"><span class="num">7</span>Install FreeRADIUS</button>
+        <button data-step="8"><span class="num">8</span>Konfigurasi FreeRADIUS</button>
+        <button data-step="9"><span class="num">9</span>Setup PM2 & Nginx</button>
+        <button data-step="10"><span class="num">10</span>Build & Start Aplikasi</button>
+        <button data-step="11"><span class="num">11</span>Firewall & Security</button>
+        <button data-step="12"><span class="num">✓</span>Selesai & Commands</button>
+      </nav>
+
+      <section class="content" id="content">
+        <div class="progress-bar"><div class="fill" id="progress" style="width:8%"></div></div>
+        <div class="step-indicator" id="stepIndicator">Step 1 of 12</div>
+
+        <!-- Step 1: Persiapan -->
+        <div class="step" data-step="1">
+          <h2>1. Persiapan & Requirement</h2>
+          <p class="note">Pastikan VPS Anda memenuhi spesifikasi minimum berikut sebelum memulai instalasi.</p>
+
+          <h3>Spesifikasi Minimum</h3>
+          <table>
+            <tr><th>Komponen</th><th>Minimum</th><th>Recommended</th></tr>
+            <tr><td>CPU</td><td>1 Core</td><td>2+ Core</td></tr>
+            <tr><td>RAM</td><td>1 GB</td><td>2+ GB</td></tr>
+            <tr><td>Storage</td><td>20 GB SSD</td><td>40+ GB SSD</td></tr>
+            <tr><td>OS</td><td>Ubuntu 20.04 LTS</td><td>Ubuntu 22.04 LTS</td></tr>
+          </table>
+
+          <h3>Fitur yang Akan Terinstall</h3>
+          <div class="features">
+            <div class="feature">
+              <h4>🌐 Next.js 15</h4>
+              <p>Modern React framework dengan App Router</p>
+            </div>
+            <div class="feature">
+              <h4>🗄️ MySQL 8.0</h4>
+              <p>Database dengan Prisma ORM</p>
+            </div>
+            <div class="feature">
+              <h4>📡 FreeRADIUS 3.x</h4>
+              <p>PPPoE & Hotspot authentication</p>
+            </div>
+            <div class="feature">
+              <h4>⚡ PM2</h4>
+              <p>Process manager untuk Node.js</p>
+            </div>
+            <div class="feature">
+              <h4>🔒 Session Security</h4>
+              <p>Auto logout 30 menit idle</p>
+            </div>
+            <div class="feature">
+              <h4>📍 Router GPS</h4>
+              <p>Tracking lokasi router dengan peta</p>
+            </div>
+          </div>
+
+          <h3>Opsi Instalasi</h3>
+          <p class="note success">💡 Tersedia 2 installer otomatis:</p>
+          <ul>
+            <li><strong>vps-install.sh</strong> - Full VPS dengan akses root</li>
+            <li><strong>vps-install-local.sh</strong> - VPS lokal tanpa akses root penuh (gunakan sudo)</li>
+          </ul>
+
+          <h3>Update Sistem</h3>
+          <div class="cmd-row">
+            <pre class="code" id="code1">sudo apt update && sudo apt upgrade -y</pre>
+            <button class="copy-btn" data-target="code1">Copy</button>
+          </div>
+
+          <h3>Install Paket Dasar</h3>
+          <div class="cmd-row">
+            <pre class="code" id="code2">sudo apt install -y curl wget git build-essential software-properties-common ufw vim htop</pre>
+            <button class="copy-btn" data-target="code2">Copy</button>
+          </div>
+        </div>
+
+        <!-- Step 2: Node.js -->
+        <div class="step" data-step="2" style="display:none">
+          <h2>2. Timezone & NTP Synchronization</h2>
+          <p class="note warning">⏰ <strong>PENTING!</strong> Sinkronisasi waktu sangat krusial untuk RADIUS. Waktu yang tidak sinkron dapat menyebabkan:</p>
+          <ul>
+            <li>Session tracking tidak akurat</li>
+            <li>Invoice dengan tanggal yang salah</li>
+            <li>Log aktivitas tidak sinkron</li>
+            <li>Authentication timeout issues</li>
+          </ul>
+
+          <h3>Cek Waktu Saat Ini</h3>
+          <div class="cmd-row">
+            <pre class="code" id="code2a">timedatectl
+date</pre>
+            <button class="copy-btn" data-target="code2a">Copy</button>
+          </div>
+
+          <h3>Set Timezone Indonesia (WIB)</h3>
+          <div class="cmd-row">
+            <pre class="code" id="code2b"># Set timezone ke Asia/Jakarta (WIB - UTC+7)
+sudo timedatectl set-timezone Asia/Jakarta
+
+# Verifikasi
+timedatectl</pre>
+            <button class="copy-btn" data-target="code2b">Copy</button>
+          </div>
+
+          <h3>Timezone Indonesia & Wilayah Lain</h3>
+          <table>
+            <tr><th>Zona</th><th>Wilayah</th><th>TZ Identifier</th><th>UTC</th></tr>
+            <tr><td><strong>WIB</strong></td><td>Sumatera, Jawa, Kalimantan Barat/Tengah</td><td><code class="inline">Asia/Jakarta</code></td><td>UTC+7</td></tr>
+            <tr><td><strong>WITA</strong></td><td>Kalsel/Kaltim, Sulawesi, Bali, NTB, NTT</td><td><code class="inline">Asia/Makassar</code></td><td>UTC+8</td></tr>
+            <tr><td><strong>WIT</strong></td><td>Maluku, Papua</td><td><code class="inline">Asia/Jayapura</code></td><td>UTC+9</td></tr>
+          </table>
+
+          <div class="note warning">
+            <strong>⚠️ CATATAN untuk Non-WIB:</strong><br>
+            Jika deploy di wilayah selain WIB (Jakarta), Anda dapat mengubah timezone dengan 2 cara:
+            <ol style="margin:10px 0 0 20px">
+              <li><strong>Via Admin Panel (RECOMMENDED):</strong> Settings → Company Settings → Pilih Timezone → Save</li>
+              <li><strong>Via Manual Config (Lama):</strong>
+                <ul style="margin-top:5px">
+                  <li>System timezone: <code class="inline">sudo timedatectl set-timezone Asia/Makassar</code></li>
+                  <li>ecosystem.config.js: <code class="inline">TZ: 'Asia/Makassar'</code></li>
+                  <li>.env file: <code class="inline">TZ="Asia/Makassar"</code></li>
+                  <li>Restart: <code class="inline">pm2 restart --update-env && systemctl restart freeradius</code></li>
+                </ul>
+              </li>
+            </ol>
+          </div>
+
+          <h3>International Timezone (Deployment Luar Negeri)</h3>
+          <table>
+            <tr><th>Negara</th><th>Timezone</th><th>TZ Identifier</th></tr>
+            <tr><td>Singapura</td><td>SGT (UTC+8)</td><td><code class="inline">Asia/Singapore</code></td></tr>
+            <tr><td>Malaysia</td><td>MYT (UTC+8)</td><td><code class="inline">Asia/Kuala_Lumpur</code></td></tr>
+            <tr><td>Thailand</td><td>ICT (UTC+7)</td><td><code class="inline">Asia/Bangkok</code></td></tr>
+            <tr><td>Filipina</td><td>PHT (UTC+8)</td><td><code class="inline">Asia/Manila</code></td></tr>
+            <tr><td>Vietnam</td><td>ICT (UTC+7)</td><td><code class="inline">Asia/Ho_Chi_Minh</code></td></tr>
+            <tr><td>UAE</td><td>GST (UTC+4)</td><td><code class="inline">Asia/Dubai</code></td></tr>
+            <tr><td>Saudi Arabia</td><td>AST (UTC+3)</td><td><code class="inline">Asia/Riyadh</code></td></tr>
+            <tr><td>Japan</td><td>JST (UTC+9)</td><td><code class="inline">Asia/Tokyo</code></td></tr>
+            <tr><td>South Korea</td><td>KST (UTC+9)</td><td><code class="inline">Asia/Seoul</code></td></tr>
+            <tr><td>Hong Kong</td><td>HKT (UTC+8)</td><td><code class="inline">Asia/Hong_Kong</code></td></tr>
+            <tr><td>Australia (Sydney)</td><td>AEDT (UTC+11)</td><td><code class="inline">Australia/Sydney</code></td></tr>
+            <tr><td>New Zealand</td><td>NZDT (UTC+13)</td><td><code class="inline">Pacific/Auckland</code></td></tr>
+          </table>
+          
+          <div class="note success">
+            <strong>💡 TIP:</strong> Timezone kini dapat diatur langsung dari <strong>Company Settings</strong> di Admin Panel.<br>
+            Setelah instalasi, buka Admin Panel → Settings → Company Settings → Pilih timezone → Save.<br>
+            Perubahan akan otomatis berlaku untuk semua halaman tanpa perlu restart manual.
+          </div>
+
+          <h3>Install & Konfigurasi Chrony (NTP)</h3>
+          <div class="cmd-row">
+            <pre class="code" id="code2c">sudo apt install -y chrony ntpdate</pre>
+            <button class="copy-btn" data-target="code2c">Copy</button>
+          </div>
+
+          <h3>Konfigurasi NTP Server Indonesia</h3>
+          <div class="cmd-row">
+            <pre class="code" id="code2d">sudo tee /etc/chrony/chrony.conf &lt;&lt;EOF
+# Indonesian NTP Servers
+server id.pool.ntp.org iburst prefer
+server 0.id.pool.ntp.org iburst
+server 1.id.pool.ntp.org iburst
+server 2.id.pool.ntp.org iburst
+server 3.id.pool.ntp.org iburst
+
+# Fallback to Asia pool
+server asia.pool.ntp.org iburst
+
+# Google and Cloudflare NTP as backup
+server time.google.com iburst
+server time.cloudflare.com iburst
+
+# Record drift
+driftfile /var/lib/chrony/drift
+
+# Allow step in first 3 updates
+makestep 1 3
+
+# Sync RTC
+rtcsync
+
+# Log
+logdir /var/log/chrony
+log measurements statistics tracking
+EOF</pre>
+            <button class="copy-btn" data-target="code2d">Copy</button>
+          </div>
+
+          <h3>Restart & Verifikasi NTP</h3>
+          <div class="cmd-row">
+            <pre class="code" id="code2e"># Restart chrony
+sudo systemctl enable chrony
+sudo systemctl restart chrony
+
+# Force sync
+sudo chronyc makestep
+
+# Cek status sync
+chronyc tracking
+chronyc sources -v
+
+# Sync hardware clock
+sudo hwclock --systohc</pre>
+            <button class="copy-btn" data-target="code2e">Copy</button>
+          </div>
+          
+          <p class="note success">Jika <code class="inline">Reference ID</code> muncul dan <code class="inline">Leap status: Normal</code>, waktu sudah sinkron!</p>
+
+          <h3>Troubleshooting Waktu Tidak Sinkron</h3>
+          <div class="cmd-row">
+            <pre class="code" id="code2f"># Jika waktu masih salah, coba:
+# 1. Stop chrony
+sudo systemctl stop chrony
+
+# 2. Manual sync dengan ntpdate
+sudo ntpdate id.pool.ntp.org
+
+# 3. Start chrony kembali
+sudo systemctl start chrony
+
+# 4. Verify
+date
+chronyc tracking</pre>
+            <button class="copy-btn" data-target="code2f">Copy</button>
+          </div>
+        </div>
+
+        <!-- Step 3: Node.js -->
+        <div class="step" data-step="3" style="display:none">
+          <h2>3. Install Node.js & Dependencies</h2>
+          <p class="note">AIBILL RADIUS membutuhkan Node.js versi 20 LTS untuk performa optimal.</p>
+
+          <h3>Install Node.js 20 LTS</h3>
+          <div class="cmd-row">
+            <pre class="code" id="code3">curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+sudo apt install -y nodejs</pre>
+            <button class="copy-btn" data-target="code3">Copy</button>
+          </div>
+
+          <h3>Verifikasi Instalasi</h3>
+          <div class="cmd-row">
+            <pre class="code" id="code4">node --version
+npm --version</pre>
+            <button class="copy-btn" data-target="code4">Copy</button>
+          </div>
+          <p class="note success">Output yang diharapkan: Node.js v20.x.x dan npm 10.x.x</p>
+
+          <h3>Install PM2 Global</h3>
+          <div class="cmd-row">
+            <pre class="code" id="code5">sudo npm install -g pm2</pre>
+            <button class="copy-btn" data-target="code5">Copy</button>
+          </div>
+        </div>
+
+        <!-- Step 4: MySQL -->
+        <div class="step" data-step="4" style="display:none">
+          <h2>4. Setup MySQL Database</h2>
+          <p class="note">Install dan konfigurasi MySQL 8.0 sebagai database utama.</p>
+
+          <h3>Install MySQL Server</h3>
+          <div class="cmd-row">
+            <pre class="code" id="code6">sudo apt install -y mysql-server mysql-client</pre>
+            <button class="copy-btn" data-target="code6">Copy</button>
+          </div>
+
+          <h3>Start & Enable MySQL</h3>
+          <div class="cmd-row">
+            <pre class="code" id="code7">sudo systemctl start mysql
+sudo systemctl enable mysql</pre>
+            <button class="copy-btn" data-target="code7">Copy</button>
+          </div>
+
+          <h3>Secure MySQL Installation</h3>
+          <div class="cmd-row">
+            <pre class="code" id="code8"># Set password root MySQL
+sudo mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root123';"
+
+# Hapus anonymous user dan flush privileges
+sudo mysql -u root -p'root123' -e "DELETE FROM mysql.user WHERE User='';"
+sudo mysql -u root -p'root123' -e "FLUSH PRIVILEGES;"</pre>
+            <button class="copy-btn" data-target="code8">Copy</button>
+          </div>
+
+          <h3>Buat Database & User</h3>
+          <div class="cmd-row">
+            <pre class="code" id="code9"># Buat database dan user untuk aplikasi
+sudo mysql -u root -p'root123' &lt;&lt;EOF
+CREATE DATABASE aibill_radius CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE USER 'aibill_user'@'localhost' IDENTIFIED BY 'aibillradius123';
+GRANT ALL PRIVILEGES ON aibill_radius.* TO 'aibill_user'@'localhost';
+FLUSH PRIVILEGES;
+EOF</pre>
+            <button class="copy-btn" data-target="code9">Copy</button>
+          </div>
+
+          <h3>Test Koneksi Database</h3>
+          <div class="cmd-row">
+            <pre class="code" id="code10"># Gunakan -p dengan single quote untuk menghindari error bash
+mysql -u aibill_user -p'aibillradius123' -e "USE aibill_radius; SELECT 'Database OK' as Status;"</pre>
+            <button class="copy-btn" data-target="code10">Copy</button>
+          </div>
+          <p class="note success">Jika muncul "Database OK" berarti koneksi berhasil.</p>
+        </div>
+
+        <!-- Step 5: Upload Aplikasi -->
+        <div class="step" data-step="5" style="display:none">
+          <h2>5. Upload & Setup Aplikasi</h2>
+          <p class="note">Upload source code AIBILL RADIUS ke VPS dan setup direktori.</p>
+
+          <h3>Buat Direktori Aplikasi</h3>
+          <div class="cmd-row">
+            <pre class="code" id="code11">sudo mkdir -p /var/www/aibill-radius
+sudo chown -R $USER:$USER /var/www/aibill-radius</pre>
+            <button class="copy-btn" data-target="code11">Copy</button>
+          </div>
+
+          <h3>Upload via SCP (dari komputer lokal)</h3>
+          <p class="note warning">Jalankan command ini di terminal <strong>komputer lokal</strong>, bukan di VPS!</p>
+          <div class="cmd-row">
+            <pre class="code" id="code12"># Upload semua file project
+scp -r AIBILL-RADIUS-main/* root@IP_VPS_ANDA:/var/www/aibill-radius/</pre>
+            <button class="copy-btn" data-target="code12">Copy</button>
+          </div>
+
+          <h3>Alternatif: Clone dari Git (jika ada)</h3>
+          <div class="cmd-row">
+            <pre class="code" id="code13">cd /var/www/aibill-radius
+git clone https://github.com/username/aibill-radius.git .</pre>
+            <button class="copy-btn" data-target="code13">Copy</button>
+          </div>
+
+          <h3>Verifikasi File</h3>
+          <div class="cmd-row">
+            <pre class="code" id="code14">cd /var/www/aibill-radius
+ls -la
+# Pastikan ada: package.json, prisma/, src/, dll</pre>
+            <button class="copy-btn" data-target="code14">Copy</button>
+          </div>
+        </div>
+
+        <!-- Step 6: Environment -->
+        <div class="step" data-step="6" style="display:none">
+          <h2>6. Konfigurasi Environment</h2>
+          <p class="note">Buat file .env dengan konfigurasi database dan aplikasi.</p>
+
+          <h3>Buat File .env</h3>
+          <div class="cmd-row">
+            <pre class="code" id="code15">cd /var/www/aibill-radius
+
+cat > .env &lt;&lt;EOF
+# Database Configuration
+DATABASE_URL="mysql://aibill_user:aibillradius123@localhost:3306/aibill_radius?connection_limit=10&pool_timeout=20"
+
+# Timezone - CRITICAL for WIB handling
+TZ="Asia/Jakarta"
+NEXT_PUBLIC_TIMEZONE="Asia/Jakarta"
+
+# App Configuration (ganti IP_VPS_ANDA)
+NEXT_PUBLIC_APP_NAME="AIBILL RADIUS ISP"
+NEXT_PUBLIC_APP_URL="http://IP_VPS_ANDA:3000"
+
+# NextAuth (generate random secret)
+NEXTAUTH_SECRET="$(openssl rand -base64 32)"
+NEXTAUTH_URL="http://IP_VPS_ANDA:3000"
+
+# Node Environment
+NODE_ENV="production"
+
+# GenieACS (optional - konfigurasi di admin panel)
+# GENIEACS_URL="http://GENIEACS_IP:7557"
+EOF</pre>
+            <button class="copy-btn" data-target="code15">Copy</button>
+          </div>
+
+          <h3>Install Dependencies</h3>
+          <p class="note warning">Proses ini memakan waktu 5-10 menit tergantung kecepatan internet.</p>
+          <div class="cmd-row">
+            <pre class="code" id="code16">cd /var/www/aibill-radius
+npm install</pre>
+            <button class="copy-btn" data-target="code16">Copy</button>
+          </div>
+
+          <h3>Setup Prisma & Database Schema</h3>
+          <div class="cmd-row">
+            <pre class="code" id="code17"># Generate Prisma Client
+npx prisma generate
+
+# Push schema ke database (buat semua tabel)
+npx prisma db push --accept-data-loss</pre>
+            <button class="copy-btn" data-target="code17">Copy</button>
+          </div>
+
+          <h3>Seed Data Awal</h3>
+          <div class="cmd-row">
+            <pre class="code" id="code18"># Seed admin user, permissions, categories, profiles, templates, dll
+npx tsx prisma/seeds/seed-all.ts</pre>
+            <button class="copy-btn" data-target="code18">Copy</button>
+          </div>
+          <p class="note success">Setelah seed, login dengan: <strong>superadmin / admin123</strong></p>
+          <p class="note">Seed akan membuat: 13 kategori transaksi, 53 permissions + role templates, 5 hotspot profiles sample, 6 WhatsApp templates, dan konfigurasi isolir RADIUS.</p>
+        </div>
+
+        <!-- Step 7: Install FreeRADIUS -->
+        <div class="step" data-step="7" style="display:none">
+          <h2>7. Install FreeRADIUS</h2>
+          <p class="note">FreeRADIUS adalah RADIUS server untuk autentikasi PPPoE dan Hotspot.</p>
+
+          <h3>Install FreeRADIUS & MySQL Module</h3>
+          <div class="cmd-row">
+            <pre class="code" id="code19">sudo apt install -y freeradius freeradius-mysql freeradius-utils freeradius-rest</pre>
+            <button class="copy-btn" data-target="code19">Copy</button>
+          </div>
+
+          <h3>Stop FreeRADIUS untuk Konfigurasi</h3>
+          <div class="cmd-row">
+            <pre class="code" id="code20">sudo systemctl stop freeradius</pre>
+            <button class="copy-btn" data-target="code20">Copy</button>
+          </div>
+
+          <h3>Verifikasi Instalasi</h3>
+          <div class="cmd-row">
+            <pre class="code" id="code21">freeradius -v | head -n1</pre>
+            <button class="copy-btn" data-target="code21">Copy</button>
+          </div>
+          <p class="note success">Output: FreeRADIUS Version 3.0.x</p>
+        </div>
+
+        <!-- Step 8: Konfigurasi FreeRADIUS -->
+        <div class="step" data-step="8" style="display:none">
+          <h2>8. Konfigurasi FreeRADIUS</h2>
+          <p class="note">Konfigurasi FreeRADIUS untuk connect ke MySQL dan REST API. Ada 2 opsi: restore dari backup atau konfigurasi manual.</p>
+
+          <h3>Opsi A: Restore dari Backup (RECOMMENDED)</h3>
+          <p class="note success">Jika Anda memiliki folder <code class="inline">freeradius-config/</code> di project, gunakan opsi ini untuk hasil yang konsisten.</p>
+          <div class="cmd-row">
+            <pre class="code" id="code22a"># Cek apakah ada backup config
+ls /var/www/aibill-radius/freeradius-config/
+
+# Jika ada, restore konfigurasi dari backup
+# Restore SQL module
+sudo cp /var/www/aibill-radius/freeradius-config/mods-enabled-sql /etc/freeradius/3.0/mods-available/sql
+
+# Restore REST module
+sudo cp /var/www/aibill-radius/freeradius-config/mods-enabled-rest /etc/freeradius/3.0/mods-available/rest
+
+# Restore sites-enabled/default
+sudo cp /var/www/aibill-radius/freeradius-config/sites-enabled-default /etc/freeradius/3.0/sites-available/default
+
+# Restore clients.conf
+sudo cp /var/www/aibill-radius/freeradius-config/clients.conf /etc/freeradius/3.0/clients.conf
+
+# PENTING: Remove BOM (Byte Order Mark) yang bisa menyebabkan FreeRADIUS gagal parse config
+# BOM dapat muncul jika file di-edit di Windows atau dengan editor yang menyimpan UTF-8 BOM
+sudo sed -i '1s/^\xEF\xBB\xBF//' /etc/freeradius/3.0/mods-available/sql
+sudo sed -i '1s/^\xEF\xBB\xBF//' /etc/freeradius/3.0/mods-available/rest
+sudo sed -i '1s/^\xEF\xBB\xBF//' /etc/freeradius/3.0/sites-available/default
+sudo sed -i '1s/^\xEF\xBB\xBF//' /etc/freeradius/3.0/clients.conf
+
+# Update kredensial database di SQL config
+sudo sed -i 's/login = .*/login = "aibill_user"/' /etc/freeradius/3.0/mods-available/sql
+sudo sed -i 's/password = .*/password = "aibillradius123"/' /etc/freeradius/3.0/mods-available/sql
+sudo sed -i 's/radius_db = .*/radius_db = "aibill_radius"/' /etc/freeradius/3.0/mods-available/sql
+
+# Enable modules
+sudo ln -sf /etc/freeradius/3.0/mods-available/sql /etc/freeradius/3.0/mods-enabled/sql
+sudo ln -sf /etc/freeradius/3.0/mods-available/rest /etc/freeradius/3.0/mods-enabled/rest
+sudo ln -sf /etc/freeradius/3.0/sites-available/default /etc/freeradius/3.0/sites-enabled/default</pre>
+            <button class="copy-btn" data-target="code22a">Copy</button>
+          </div>
+          <p class="note warning">⚠️ <strong>PENTING:</strong> BOM (Byte Order Mark) pada file config dapat menyebabkan FreeRADIUS tidak binding ke port 1812/1813 atau module SQL/REST tidak loading. Selalu jalankan perintah <code class="inline">sed</code> untuk remove BOM di atas!</p>
+
+          <h3>Opsi B: Konfigurasi Manual SQL Module</h3>
+          <div class="cmd-row">
+            <pre class="code" id="code22">sudo tee /etc/freeradius/3.0/mods-available/sql &lt;&lt;EOF
+sql {
+    driver = "rlm_sql_mysql"
+    dialect = "mysql"
+    
+    server = "localhost"
+    port = 3306
+    login = "aibill_user"
+    password = "aibillradius123"
+    radius_db = "aibill_radius"
+    
+    acct_table1 = "radacct"
+    acct_table2 = "radacct"
+    postauth_table = "radpostauth"
+    authcheck_table = "radcheck"
+    groupcheck_table = "radgroupcheck"
+    authreply_table = "radreply"
+    groupreply_table = "radgroupreply"
+    usergroup_table = "radusergroup"
+    
+    read_clients = yes
+    client_table = "nas"
+    
+    # Required for PPPoE group profiles
+    read_groups = yes
+    read_profiles = yes
+    
+    # Username format untuk queries
+    sql_user_name = "%{%{Stripped-User-Name}:-%{User-Name}}"
+    
+    # Group attribute
+    group_attribute = "SQL-Group"
+    
+    # Delete stale sessions on startup
+    delete_stale_sessions = yes
+    
+    pool {
+        start = 5
+        min = 4
+        max = 32
+        spare = 3
+        uses = 0
+        lifetime = 0
+        idle_timeout = 60
+    }
+    
+    \$INCLUDE \${modconfdir}/\${.:name}/main/\${dialect}/queries.conf
+}
+EOF</pre>
+            <button class="copy-btn" data-target="code22">Copy</button>
+          </div>
+
+          <h3>Opsi B: Konfigurasi Manual REST Module</h3>
+          <div class="cmd-row">
+            <pre class="code" id="code23">sudo tee /etc/freeradius/3.0/mods-available/rest &lt;&lt;EOF
+rest {
+    tls {
+        check_cert = no
+        check_cert_cn = no
+    }
+    connect_uri = "http://localhost:3000"
+
+    post-auth {
+        uri = "\\\${..connect_uri}/api/radius/post-auth"
+        method = "post"
+        body = "json"
+        data = "{ \"username\": \"%{User-Name}\", \"reply\": \"%{reply:Packet-Type}\", \"nasIp\": \"%{NAS-IP-Address}\", \"framedIp\": \"%{Framed-IP-Address}\" }"
+        tls = \\\${..tls}
+    }
+
+    pool {
+        start = 0
+        min = 0
+        max = 32
+        spare = 1
+        uses = 0
+        lifetime = 0
+        idle_timeout = 60
+        connect_timeout = 3
+    }
+}
+EOF</pre>
+            <button class="copy-btn" data-target="code23">Copy</button>
+          </div>
+
+          <h3>Enable Modules (untuk Opsi B)</h3>
+          <div class="cmd-row">
+            <pre class="code" id="code24"># Enable SQL module
+sudo ln -sf /etc/freeradius/3.0/mods-available/sql /etc/freeradius/3.0/mods-enabled/
+
+# Enable REST module
+sudo ln -sf /etc/freeradius/3.0/mods-available/rest /etc/freeradius/3.0/mods-enabled/
+
+# Set permissions
+sudo chown -R freerad:freerad /etc/freeradius/3.0/
+sudo chmod 640 /etc/freeradius/3.0/mods-available/sql</pre>
+            <button class="copy-btn" data-target="code24">Copy</button>
+          </div>
+
+          <h3>Disable filter_username (untuk PPPoE realm)</h3>
+          <p class="note">PPPoE menggunakan format <code class="inline">username@realm</code>. Policy filter_username secara default menolak format ini, sehingga harus di-disable.</p>
+          <div class="cmd-row">
+            <pre class="code" id="code25">sudo sed -i 's/^\(\s*\)filter_username/\1#filter_username/' /etc/freeradius/3.0/sites-enabled/default</pre>
+            <button class="copy-btn" data-target="code25">Copy</button>
+          </div>
+
+          <h3>Tambahkan CoA/Disconnect Support</h3>
+          <p class="note">CoA (Change of Authorization) diperlukan untuk fitur disconnect user dan isolir. Port 3799 digunakan untuk CoA.</p>
+          <div class="cmd-row">
+            <pre class="code" id="code25b"># Cek apakah CoA sudah ada di config
+if ! grep -q "type = coa" /etc/freeradius/3.0/sites-available/default; then
+    echo '
+# CoA/Disconnect support
+listen {
+    type = coa
+    ipaddr = *
+    port = 3799
+}' | sudo tee -a /etc/freeradius/3.0/sites-available/default
+fi</pre>
+            <button class="copy-btn" data-target="code25b">Copy</button>
+          </div>
+
+          <h3>Test Konfigurasi</h3>
+          <div class="cmd-row">
+            <pre class="code" id="code26">sudo freeradius -C</pre>
+            <button class="copy-btn" data-target="code26">Copy</button>
+          </div>
+          <p class="note success">Jika tidak ada error, konfigurasi FreeRADIUS sudah benar!</p>
+          <p class="note warning">Jika ada error, jalankan <code class="inline">sudo freeradius -X</code> untuk debug mode dan lihat pesan error yang lebih detail.</p>
+
+          <h3>Start FreeRADIUS</h3>
+          <div class="cmd-row">
+            <pre class="code" id="code27">sudo systemctl enable freeradius
+sudo systemctl start freeradius
+sudo systemctl status freeradius</pre>
+            <button class="copy-btn" data-target="code27">Copy</button>
+          </div>
+
+          <h3>Verifikasi Port Binding</h3>
+          <p class="note">Pastikan FreeRADIUS binding ke port 1812 (auth), 1813 (acct), dan 3799 (CoA).</p>
+          <div class="cmd-row">
+            <pre class="code" id="code27b">ss -tulnp | grep radiusd</pre>
+            <button class="copy-btn" data-target="code27b">Copy</button>
+          </div>
+          <p class="note success">Output yang diharapkan: port 1812, 1813, dan 3799 dalam status LISTEN</p>
+
+          <h3>⚠️ Troubleshooting: BOM (Byte Order Mark) Issue</h3>
+          <p class="note danger">Jika FreeRADIUS gagal start atau radtest tidak mendapat reply, kemungkinan file config memiliki BOM (biasanya terjadi saat upload dari Windows).</p>
+          
+          <h4>Cek BOM di config file:</h4>
+          <div class="cmd-row">
+            <pre class="code" id="code27c"># Cek apakah ada BOM UTF-16 (fffe) atau UTF-8 (efbbbf)
+xxd /etc/freeradius/3.0/clients.conf | head -3</pre>
+            <button class="copy-btn" data-target="code27c">Copy</button>
+          </div>
+
+          <h4>Fix BOM dengan iconv:</h4>
+          <div class="cmd-row">
+            <pre class="code" id="code27d"># Jika terdeteksi fffe atau feff (UTF-16)
+iconv -f UTF-16 -t UTF-8 /etc/freeradius/3.0/clients.conf > /tmp/clients.conf
+mv /tmp/clients.conf /etc/freeradius/3.0/clients.conf
+
+# Restart FreeRADIUS
+systemctl restart freeradius</pre>
+            <button class="copy-btn" data-target="code27d">Copy</button>
+          </div>
+
+          <h4>Test RADIUS Authentication:</h4>
+          <div class="cmd-row">
+            <pre class="code" id="code27e"># Test dengan radtest (harus dapat Access-Accept atau Access-Reject)
+radtest testuser testpass localhost 0 testing123</pre>
+            <button class="copy-btn" data-target="code27e">Copy</button>
+          </div>
+          <p class="note success">Jika mendapat "Access-Reject" berarti FreeRADIUS sudah berjalan (user tidak ada di database). Jika "No reply from server" berarti masih ada masalah konfigurasi.</p>
+        </div>
+
+        <!-- Step 9: PM2 & Nginx -->
+        <div class="step" data-step="9" style="display:none">
+          <h2>9. Setup PM2 & Nginx</h2>
+          <p class="note">Konfigurasi process manager dan reverse proxy.</p>
+
+          <h3>Install Nginx</h3>
+          <div class="cmd-row">
+            <pre class="code" id="code28">sudo apt install -y nginx</pre>
+            <button class="copy-btn" data-target="code28">Copy</button>
+          </div>
+
+          <h3>Buat PM2 Ecosystem File</h3>
+          <div class="cmd-row">
+            <pre class="code" id="code29">cat > /var/www/aibill-radius/ecosystem.config.js &lt;&lt;EOF
+module.exports = {
+  apps: [{
+    name: 'aibill-radius',
+    script: 'npm',
+    args: 'start',
+    cwd: '/var/www/aibill-radius',
+    instances: 1,
+    exec_mode: 'cluster',
+    watch: false,
+    max_memory_restart: '1G',
+    env: {
+      NODE_ENV: 'production',
+      PORT: 3000
+    },
+    error_file: '/var/www/aibill-radius/logs/error.log',
+    out_file: '/var/www/aibill-radius/logs/out.log',
+    log_date_format: 'YYYY-MM-DD HH:mm:ss Z',
+    merge_logs: true,
+    autorestart: true,
+    max_restarts: 10
+  }]
+};
+EOF
+
+mkdir -p /var/www/aibill-radius/logs</pre>
+            <button class="copy-btn" data-target="code29">Copy</button>
+          </div>
+
+          <h3>Konfigurasi Nginx (ganti IP_VPS_ANDA)</h3>
+          <div class="cmd-row">
+            <pre class="code" id="code30">sudo tee /etc/nginx/sites-available/aibill-radius &lt;&lt;EOF
+server {
+    listen 80;
+    server_name IP_VPS_ANDA;
+
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header X-XSS-Protection "1; mode=block" always;
+
+    client_max_body_size 10M;
+
+    location / {
+        proxy_pass http://localhost:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade \\\$http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host \\\$host;
+        proxy_set_header X-Real-IP \\\$remote_addr;
+        proxy_set_header X-Forwarded-For \\\$proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto \\\$scheme;
+        proxy_cache_bypass \\\$http_upgrade;
+        proxy_read_timeout 300s;
+    }
+}
+EOF</pre>
+            <button class="copy-btn" data-target="code30">Copy</button>
+          </div>
+
+          <h3>Aktifkan Nginx Config</h3>
+          <div class="cmd-row">
+            <pre class="code" id="code31">sudo ln -sf /etc/nginx/sites-available/aibill-radius /etc/nginx/sites-enabled/
+sudo rm -f /etc/nginx/sites-enabled/default
+sudo nginx -t
+sudo systemctl restart nginx
+sudo systemctl enable nginx</pre>
+            <button class="copy-btn" data-target="code31">Copy</button>
+          </div>
+        </div>
+
+        <!-- Step 10: Build & Start -->
+        <div class="step" data-step="10" style="display:none">
+          <h2>10. Build & Start Aplikasi</h2>
+          <p class="note warning">Proses build memakan waktu 5-10 menit dan membutuhkan minimal 1.5GB RAM.</p>
+
+          <h3>Buat Swap (jika RAM &lt; 2GB)</h3>
+          <div class="cmd-row">
+            <pre class="code" id="code32"># Cek memory
+free -h
+
+# Buat swap jika RAM kurang dari 2GB
+sudo dd if=/dev/zero of=/swapfile bs=1M count=2048
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+sudo swapon /swapfile
+echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab</pre>
+            <button class="copy-btn" data-target="code32">Copy</button>
+          </div>
+
+          <h3>Build Aplikasi</h3>
+          <div class="cmd-row">
+            <pre class="code" id="code33">cd /var/www/aibill-radius
+
+# Build dengan memory limit
+NODE_OPTIONS="--max-old-space-size=1536" npm run build</pre>
+            <button class="copy-btn" data-target="code33">Copy</button>
+          </div>
+          <p class="note">Tunggu sampai muncul "✓ Compiled successfully" dan route list.</p>
+
+          <h3>Start dengan PM2</h3>
+          <div class="cmd-row">
+            <pre class="code" id="code34">cd /var/www/aibill-radius
+
+# Start aplikasi
+pm2 start ecosystem.config.js
+
+# Save dan setup startup
+pm2 save
+pm2 startup systemd -u root --hp /root
+# Ikuti instruksi yang muncul (copy-paste command)</pre>
+            <button class="copy-btn" data-target="code34">Copy</button>
+          </div>
+
+          <h3>Verifikasi Aplikasi Running</h3>
+          <div class="cmd-row">
+            <pre class="code" id="code35">pm2 status
+pm2 logs aibill-radius --lines 20</pre>
+            <button class="copy-btn" data-target="code35">Copy</button>
+          </div>
+        </div>
+
+        <!-- Step 11: Firewall -->
+        <div class="step" data-step="11" style="display:none">
+          <h2>11. Firewall & Security</h2>
+          <p class="note">Konfigurasi firewall untuk keamanan server.</p>
+
+          <h3>Setup UFW Firewall</h3>
+          <div class="cmd-row">
+            <pre class="code" id="code36">sudo ufw --force enable
+sudo ufw allow 22/tcp     # SSH
+sudo ufw allow 80/tcp     # HTTP
+sudo ufw allow 443/tcp    # HTTPS
+sudo ufw allow 1812/udp   # RADIUS Auth
+sudo ufw allow 1813/udp   # RADIUS Accounting
+sudo ufw allow 3799/udp   # RADIUS CoA/Disconnect
+
+sudo ufw status</pre>
+            <button class="copy-btn" data-target="code36">Copy</button>
+          </div>
+
+          <h3>Port yang Digunakan</h3>
+          <table>
+            <tr><th>Port</th><th>Protocol</th><th>Service</th></tr>
+            <tr><td>22</td><td>TCP</td><td>SSH</td></tr>
+            <tr><td>80</td><td>TCP</td><td>HTTP (Nginx)</td></tr>
+            <tr><td>443</td><td>TCP</td><td>HTTPS (SSL)</td></tr>
+            <tr><td>1812</td><td>UDP</td><td>RADIUS Authentication</td></tr>
+            <tr><td>1813</td><td>UDP</td><td>RADIUS Accounting</td></tr>
+            <tr><td>3799</td><td>UDP</td><td>RADIUS CoA/Disconnect</td></tr>
+            <tr><td>3000</td><td>TCP</td><td>Next.js (internal)</td></tr>
+            <tr><td>3306</td><td>TCP</td><td>MySQL (internal)</td></tr>
+          </table>
+
+          <h3>Setup SSL dengan Certbot (Optional)</h3>
+          <div class="cmd-row">
+            <pre class="code" id="code37"># Install Certbot
+sudo apt install -y certbot python3-certbot-nginx
+
+# Generate SSL (ganti domain)
+sudo certbot --nginx -d yourdomain.com</pre>
+            <button class="copy-btn" data-target="code37">Copy</button>
+          </div>
+        </div>
+
+        <!-- Step 12: Selesai -->
+        <div class="step" data-step="12" style="display:none">
+          <h2>✅ Instalasi Selesai!</h2>
+          <p class="note success">Selamat! AIBILL RADIUS berhasil diinstall. Akses aplikasi dan mulai konfigurasi.</p>
+
+          <h3>Akses Aplikasi</h3>
+          <table>
+            <tr><th>URL</th><th>Keterangan</th></tr>
+            <tr><td><code class="inline">http://IP_VPS_ANDA</code></td><td>Homepage</td></tr>
+            <tr><td><code class="inline">http://IP_VPS_ANDA/admin/login</code></td><td>Admin Panel</td></tr>
+            <tr><td><code class="inline">http://IP_VPS_ANDA/daftar</code></td><td>Form Pendaftaran</td></tr>
+          </table>
+
+          <h3>Default Login</h3>
+          <div class="note warning">
+            <strong>Username:</strong> superadmin<br>
+            <strong>Password:</strong> admin123<br><br>
+            ⚠️ <strong>GANTI PASSWORD SEGERA setelah login pertama!</strong>
+          </div>
+
+          <h3>Commands yang Sering Digunakan</h3>
+          <div class="cmd-row">
+            <pre class="code" id="code38"># PM2 - Aplikasi
+pm2 status                    # Cek status
+pm2 logs aibill-radius        # Lihat logs
+pm2 restart aibill-radius     # Restart
+pm2 stop aibill-radius        # Stop
+
+# FreeRADIUS
+sudo systemctl status freeradius
+sudo systemctl restart freeradius
+sudo freeradius -X            # Debug mode
+
+# MySQL
+mysql -u aibill_user -paibillradius123 aibill_radius
+
+# Nginx
+sudo systemctl status nginx
+sudo nginx -t                 # Test config
+
+# Time & NTP (PENTING untuk RADIUS!)
+date                          # Cek waktu saat ini
+timedatectl                   # Cek timezone & NTP status
+chronyc tracking              # Cek sync NTP
+chronyc sources               # Lihat NTP servers
+sudo chronyc makestep         # Force time sync</pre>
+            <button class="copy-btn" data-target="code38">Copy</button>
+          </div>
+
+          <h3>Troubleshooting Waktu</h3>
+          <div class="cmd-row">
+            <pre class="code" id="code38b"># Jika waktu tidak sinkron atau salah:
+# 1. Set timezone Indonesia (WIB)
+sudo timedatectl set-timezone Asia/Jakarta
+
+# 2. Restart NTP service
+sudo systemctl restart chrony
+
+# 3. Force sync time
+sudo chronyc makestep
+
+# 4. Sync hardware clock
+sudo hwclock --systohc
+
+# 5. Verifikasi
+date
+chronyc tracking</pre>
+            <button class="copy-btn" data-target="code38b">Copy</button>
+          </div>
+
+          <h3>Deployment Update</h3>
+          <div class="cmd-row">
+            <pre class="code" id="code39">cd /var/www/aibill-radius
+
+# Stop aplikasi
+pm2 stop aibill-radius
+
+# Upload file baru via SCP (dari lokal)
+# scp -r src prisma package.json root@IP_VPS:/var/www/aibill-radius/
+
+# Install dependencies (jika ada perubahan)
+npm install
+
+# Generate Prisma & Push schema
+npx prisma generate
+npx prisma db push
+
+# Build ulang
+npm run build
+
+# Start kembali
+pm2 restart aibill-radius
+pm2 save</pre>
+            <button class="copy-btn" data-target="code39">Copy</button>
+          </div>
+
+          <h3>Konfigurasi Selanjutnya di Admin Panel</h3>
+          <ul>
+            <li>✅ <strong>Settings → Company</strong> - Info perusahaan, logo</li>
+            <li>✅ <strong>Network → Router/NAS</strong> - Tambah MikroTik router</li>
+            <li>✅ <strong>Network → OLT/ODC/ODP</strong> - Setup jaringan FTTH</li>
+            <li>✅ <strong>Network → Network Map</strong> - Visualisasi topologi jaringan</li>
+            <li>✅ <strong>PPPoE → Profiles</strong> - Buat profile bandwidth</li>
+            <li>✅ <strong>PPPoE → Users</strong> - Tambah pelanggan PPPoE</li>
+            <li>✅ <strong>PPPoE → Sync MikroTik</strong> - Import user dari MikroTik</li>
+            <li>✅ <strong>Hotspot → Profiles</strong> - Buat profile voucher</li>
+            <li>✅ <strong>GenieACS</strong> - Konfigurasi TR-069 (opsional)</li>
+            <li>✅ <strong>WhatsApp</strong> - Setup notifikasi WA</li>
+            <li>✅ <strong>Payment Gateway</strong> - Midtrans/Xendit/Duitku</li>
+          </ul>
+
+          <h3>Fitur Session & Security</h3>
+          <ul>
+            <li>🔐 <strong>Session Timeout</strong> - Auto logout setelah 30 menit tidak aktif</li>
+            <li>⏰ <strong>Warning Modal</strong> - Peringatan 60 detik sebelum logout</li>
+            <li>📅 <strong>Max Session</strong> - Session expire setelah 1 hari</li>
+            <li>🔄 <strong>Auto Refresh</strong> - Session di-refresh setiap jam</li>
+          </ul>
+
+          <h3>Fitur Router GPS Tracking</h3>
+          <ul>
+            <li>📍 <strong>GPS Coordinates</strong> - Simpan latitude/longitude router</li>
+            <li>🗺️ <strong>Map Picker</strong> - Pilih lokasi dengan interactive map</li>
+            <li>🔍 <strong>Location Search</strong> - Cari alamat dengan autocomplete</li>
+            <li>📌 <strong>Marker Clustering</strong> - Tampilan marker router di peta</li>
+          </ul>
+
+          <h3>Fitur FTTH Network Management</h3>
+          <ul>
+            <li>📡 <strong>OLT Management</strong> - Kelola Optical Line Terminal</li>
+            <li>📦 <strong>ODC Management</strong> - Kelola Optical Distribution Cabinet</li>
+            <li>📍 <strong>ODP Management</strong> - Kelola Optical Distribution Point</li>
+            <li>👥 <strong>Customer Assignment</strong> - Assign pelanggan ke port ODP</li>
+            <li>🗺️ <strong>GPS Location</strong> - Map picker dan auto GPS</li>
+          </ul>
+
+          <h3>Fitur MikroTik Rate Limit Format (v2.4.3)</h3>
+          <ul>
+            <li>🚀 <strong>Full Burst Support</strong> - Hotspot & PPPoE profiles support MikroTik burst parameters</li>
+            <li>📊 <strong>Advanced QoS</strong> - Configure burst rate, threshold, time, priority, dan minimum rate</li>
+            <li>💡 <strong>Format Guide</strong> - Helper text dengan contoh format lengkap</li>
+            <li>🔤 <strong>Monospace Input</strong> - Font monospace untuk readability rate limit</li>
+            <li>⚡ <strong>Backward Compatible</strong> - Tetap support format simple (5M/5M)</li>
+            <li>🎯 <strong>No Manual Config</strong> - Tidak perlu edit manual di MikroTik setelah sync</li>
+          </ul>
+          <p class="note">
+            Format: <code class="inline">rx-rate[/tx-rate] [rx-burst-rate[/tx-burst-rate]] [rx-burst-threshold[/tx-burst-threshold]] [rx-burst-time[/tx-burst-time]] [priority] [rx-rate-min[/tx-rate-min]]</code><br>
+            Contoh: <code class="inline">10M/10M 15M/15M 8M/8M 5 1M/1M</code> (normal 10M, burst sampai 15M, priority 5, minimum guarantee 1M)
+          </p>
+
+          <h3>Fitur Agent Management Enhancement (v2.4.2)</h3>
+          <ul>
+            <li>☑️ <strong>Bulk Selection</strong> - Checkbox untuk select multiple agents</li>
+            <li>🗑️ <strong>Bulk Delete</strong> - Delete multiple agents sekaligus</li>
+            <li>🔄 <strong>Bulk Status</strong> - Ubah status Active/Inactive multiple agents</li>
+            <li>🕐 <strong>Login Tracking</strong> - Kolom "Login Terakhir" track aktivitas agent</li>
+            <li>📦 <strong>Voucher Stock</strong> - Kolom "Stock" show available vouchers (WAITING)</li>
+            <li>⚙️ <strong>Status Management</strong> - Dropdown Active/Inactive di edit modal</li>
+          </ul>
+
+          <h3>Timezone & Date Handling (v2.3.1+)</h3>
+          <p class="note warning">⏰ <strong>PENTING!</strong> Aplikasi menggunakan timezone-aware date handling:</p>
+          <ul>
+            <li>🌍 <strong>Database</strong> - Stores UTC (Prisma default)</li>
+            <li>📍 <strong>FreeRADIUS</strong> - Stores WIB (local server time)</li>
+            <li>🔄 <strong>API</strong> - Converts UTC ↔ WIB automatically</li>
+            <li>🖥️ <strong>PM2 Environment</strong> - TZ=Asia/Jakarta (critical for <code class="inline">new Date()</code>)</li>
+            <li>📊 <strong>Display</strong> - All times shown in WIB without browser offset</li>
+          </ul>
+
+          <h3>Cron Job System (Automated Tasks)</h3>
+          <p>10 automated background jobs untuk maintenance dan operasional:</p>
+          <table>
+            <tr><th>Job</th><th>Schedule</th><th>Function</th></tr>
+            <tr><td>Voucher Sync</td><td>5 menit</td><td>Sync voucher status dengan RADIUS</td></tr>
+            <tr><td>Disconnect Sessions</td><td>5 menit</td><td>Disconnect expired voucher sessions (CoA)</td></tr>
+            <tr><td>Agent Sales</td><td>Harian 1 AM</td><td>Update statistik penjualan agen</td></tr>
+            <tr><td>Auto Isolir</td><td>Setiap jam</td><td>Suspend pelanggan yang nunggak</td></tr>
+            <tr><td>Invoice Generation</td><td>Harian 2 AM</td><td>Generate invoice bulanan otomatis</td></tr>
+            <tr><td>Payment Reminder</td><td>Harian 8 AM</td><td>Kirim reminder pembayaran</td></tr>
+            <tr><td>WhatsApp Queue</td><td>10 menit</td><td>Process antrian pesan WhatsApp</td></tr>
+            <tr><td>Expired Voucher</td><td>Harian 3 AM</td><td>Hapus voucher lama (expired)</td></tr>
+            <tr><td>Activity Log</td><td>Harian 2 AM</td><td>Hapus log aktivitas >30 hari</td></tr>
+            <tr><td>Session Cleanup</td><td>Harian 4 AM</td><td>Clean old session data</td></tr>
+          </table>
+          <p class="note">💡 Semua cron jobs dapat di-trigger manual dari <strong>Settings → Cron</strong> di admin panel.</p>
+
+          <h3>PM2 Environment Fix (Critical for Timezone)</h3>
+          <div class="note warning">
+            <strong>⚠️ PENTING!</strong> Pastikan <code class="inline">ecosystem.config.js</code> sudah include TZ environment:
+          </div>
+          <div class="cmd-row">
+            <pre class="code" id="code39b"># Cek ecosystem.config.js
+cat /var/www/aibill-radius/ecosystem.config.js
+
+# Harus ada:
+# env: {
+#   NODE_ENV: 'production',
+#   PORT: 3000,
+#   TZ: 'Asia/Jakarta'  👈 INI PENTING!
+# }
+
+# Jika belum ada, edit dan restart:
+cd /var/www/aibill-radius
+nano ecosystem.config.js
+
+# Tambahkan TZ di env block, lalu:
+pm2 restart ecosystem.config.js --update-env
+pm2 save
+
+# Verifikasi:
+pm2 env 0 | grep TZ
+# Output: TZ=Asia/Jakarta</pre>
+            <button class="copy-btn" data-target="code39b">Copy</button>
+          </div>
+
+          <h3>Setup Auto-Restart dari Admin Panel (Opsional)</h3>
+          <p class="note success">💡 Fitur ini memungkinkan restart PM2 dan FreeRADIUS langsung dari Admin Panel saat mengubah timezone.</p>
+          <div class="cmd-row">
+            <pre class="code" id="code39c"># Setup sudoers agar www-data bisa restart freeradius tanpa password
+# PENTING: Ganti 'www-data' dengan user yang menjalankan PM2
+
+# Buka sudoers dengan visudo (JANGAN edit langsung!)
+sudo visudo
+
+# Tambahkan baris berikut di akhir file:
+www-data ALL=(ALL) NOPASSWD: /bin/systemctl restart freeradius
+
+# Jika menggunakan user lain (misal: ubuntu), ganti www-data:
+# ubuntu ALL=(ALL) NOPASSWD: /bin/systemctl restart freeradius
+
+# Simpan dan keluar (Ctrl+X, Y, Enter di nano)
+
+# Verifikasi:
+sudo -u www-data sudo systemctl restart freeradius
+# Harus bisa restart tanpa prompt password</pre>
+            <button class="copy-btn" data-target="code39c">Copy</button>
+          </div>
+          <p class="note warning">⚠️ Jika tidak setup sudoers, auto-restart hanya akan restart PM2. FreeRADIUS perlu restart manual.</p>
+            <li>📏 <strong>Distance Calculation</strong> - Hitung jarak pelanggan ke ODP</li>
+          </ul>
+
+          <h3>Dokumentasi Lengkap</h3>
+          <ul>
+            <li>📘 <code class="inline">docs/GENIEACS-GUIDE.md</code> - TR-069 WiFi Management</li>
+            <li>📘 <code class="inline">docs/FREERADIUS-SETUP.md</code> - FreeRADIUS Detail</li>
+            <li>📘 <code class="inline">docs/AGENT_DEPOSIT_SYSTEM.md</code> - Sistem Agent</li>
+          </ul>
+        </div>
+
+        <div class="controls">
+          <div class="step-indicator" id="stepIndicator2"></div>
+          <div>
+            <button class="btn ghost" id="prev">← Prev</button>
+            <button class="btn primary" id="next">Next →</button>
+          </div>
+        </div>
+
+        <footer>AIBILL RADIUS v2.3 — ISP Billing System dengan FreeRADIUS, PPPoE, Hotspot, GPS Tracking & GenieACS TR-069</footer>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    const steps = Array.from(document.querySelectorAll('nav.steps button'));
+    const panels = Array.from(document.querySelectorAll('.step'));
+    const progress = document.getElementById('progress');
+    const stepIndicator = document.getElementById('stepIndicator');
+    const stepIndicator2 = document.getElementById('stepIndicator2');
+    const nextBtn = document.getElementById('next');
+    const prevBtn = document.getElementById('prev');
+    let current = 0;
+
+    function show(i) {
+      panels.forEach(p => p.style.display = 'none');
+      steps.forEach((s, idx) => {
+        s.classList.remove('active');
+        if (idx < i) s.classList.add('done');
+        else s.classList.remove('done');
+      });
+      panels[i].style.display = 'block';
+      steps[i].classList.add('active');
+      current = i;
+      
+      const pct = ((i + 1) / panels.length * 100).toFixed(0);
+      progress.style.width = pct + '%';
+      stepIndicator.textContent = `Step ${i + 1} of ${panels.length}`;
+      stepIndicator2.textContent = `Step ${i + 1} of ${panels.length}`;
+      
+      nextBtn.textContent = i === panels.length - 1 ? 'Selesai ✓' : 'Next →';
+      prevBtn.style.visibility = i === 0 ? 'hidden' : 'visible';
+      
+      // Scroll to top of content
+      document.querySelector('.content').scrollTop = 0;
+    }
+
+    steps.forEach((btn, idx) => btn.addEventListener('click', () => show(idx)));
+    nextBtn.addEventListener('click', () => {
+      if (current < panels.length - 1) show(current + 1);
+    });
+    prevBtn.addEventListener('click', () => {
+      if (current > 0) show(current - 1);
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' && current < panels.length - 1) show(current + 1);
+      if (e.key === 'ArrowLeft' && current > 0) show(current - 1);
+    });
+
+    // Copy buttons
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const target = document.getElementById(btn.dataset.target);
+        const text = target.innerText;
+        
+        try {
+          await navigator.clipboard.writeText(text);
+          btn.textContent = 'Copied ✓';
+          btn.classList.add('copied');
+          setTimeout(() => {
+            btn.textContent = 'Copy';
+            btn.classList.remove('copied');
+          }, 2000);
+        } catch (e) {
+          // Fallback
+          const range = document.createRange();
+          range.selectNodeContents(target);
+          const sel = window.getSelection();
+          sel.removeAllRanges();
+          sel.addRange(range);
+          try {
+            document.execCommand('copy');
+            btn.textContent = 'Copied ✓';
+            btn.classList.add('copied');
+            setTimeout(() => {
+              btn.textContent = 'Copy';
+              btn.classList.remove('copied');
+            }, 2000);
+          } catch (err) {
+            alert('Copy failed — silakan salin manual.');
+          }
+          sel.removeAllRanges();
+        }
+      });
+    });
+
+    // Initialize
+    show(0);
+  </script>
+</body>
+</html>
